@@ -29,7 +29,9 @@ class MainVC: UIViewController {
     }
     
     @IBAction func filterBtnPressed(_ sender: Any) {
-        
+        let filterVC = FilterVC()
+        filterVC.modalPresentationStyle = .custom
+        present(filterVC, animated: true, completion: nil)
     }
 }
 
@@ -45,6 +47,10 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: newsCellId, for: indexPath) as! NewsCell
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
 }
 

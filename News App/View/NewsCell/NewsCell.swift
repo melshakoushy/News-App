@@ -19,5 +19,11 @@ class NewsCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        setupView()
+    }
+    
+    func setupView() {
+        mainView.addShadow()
+        mainView.addBorder()
     }
 }
