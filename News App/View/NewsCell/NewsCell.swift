@@ -9,16 +9,15 @@
 import UIKit
 
 class NewsCell: UITableViewCell {
+    
+    //Outlets
+    @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var newsImg: UIImageView!
+    @IBOutlet weak var newsTitleLbl: UILabel!
+    @IBOutlet weak var newsDateLbl: UILabel!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
 }
