@@ -10,43 +10,48 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsCell" id="KGk-i7-Jjw" customClass="NewsCell" customModule="News_App" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="374" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="374" height="130"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="374" height="100"/>
+                <rect key="frame" x="0.0" y="0.0" width="374" height="130"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qqw-UP-xGR">
-                        <rect key="frame" x="8" y="8" width="358" height="84"/>
+                        <rect key="frame" x="8" y="8" width="358" height="114"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7MY-XW-2Og">
-                                <rect key="frame" x="16" y="12" width="60" height="60"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7MY-XW-2Og">
+                                <rect key="frame" x="16" y="12" width="90" height="90"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="LVD-UX-7lC"/>
-                                    <constraint firstAttribute="height" constant="60" id="oMy-A9-SxQ"/>
+                                    <constraint firstAttribute="width" constant="90" id="LVD-UX-7lC"/>
+                                    <constraint firstAttribute="height" constant="90" id="oMy-A9-SxQ"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCH-iG-01s">
-                                <rect key="frame" x="96" y="12" width="51" height="27.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="sCH-iG-01s">
+                                <rect key="frame" x="114" y="12" width="236" height="66"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZ6-7B-eHy">
-                                <rect key="frame" x="304" y="51.5" width="38" height="20.5"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
+                                <rect key="frame" x="311.5" y="82" width="30.5" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="vsn-GZ-PLN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="sCH-iG-01s" secondAttribute="trailing" constant="8" id="3Ro-PW-cpv"/>
                             <constraint firstItem="sCH-iG-01s" firstAttribute="top" secondItem="7MY-XW-2Og" secondAttribute="top" id="5yr-mc-nDb"/>
-                            <constraint firstItem="sCH-iG-01s" firstAttribute="leading" secondItem="7MY-XW-2Og" secondAttribute="trailing" constant="20" id="8Ao-e4-ZgR"/>
+                            <constraint firstItem="sCH-iG-01s" firstAttribute="leading" secondItem="7MY-XW-2Og" secondAttribute="trailing" constant="8" id="8Ao-e4-ZgR"/>
                             <constraint firstItem="7MY-XW-2Og" firstAttribute="centerY" secondItem="Qqw-UP-xGR" secondAttribute="centerY" id="N5f-OV-Ipo"/>
                             <constraint firstItem="7MY-XW-2Og" firstAttribute="leading" secondItem="Qqw-UP-xGR" secondAttribute="leading" constant="16" id="Peb-xa-FzK"/>
                             <constraint firstItem="yZ6-7B-eHy" firstAttribute="bottom" secondItem="7MY-XW-2Og" secondAttribute="bottom" id="rcr-2g-OuB"/>
                             <constraint firstAttribute="trailing" secondItem="yZ6-7B-eHy" secondAttribute="trailing" constant="16" id="sEY-Qt-Ceq"/>
+                            <constraint firstItem="yZ6-7B-eHy" firstAttribute="top" secondItem="sCH-iG-01s" secondAttribute="bottom" constant="4" id="xsb-jk-mOF"/>
                         </constraints>
                     </view>
                 </subviews>
