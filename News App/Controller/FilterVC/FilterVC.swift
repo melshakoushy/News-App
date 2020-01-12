@@ -8,6 +8,7 @@
 
 import UIKit
 import iOSDropDown
+import NVActivityIndicatorView
 
 class FilterVC: UIViewController {
     
@@ -21,6 +22,7 @@ class FilterVC: UIViewController {
     @IBOutlet weak var sourceRadioBtn: UIButton!
     @IBOutlet weak var countryDropDown: DropDown!
     @IBOutlet weak var sourceDropDown: DropDown!
+    @IBOutlet weak var indicator: NVActivityIndicatorView!
     
     //Variables
     var selectedCountryCode: String = "us"
@@ -29,6 +31,9 @@ class FilterVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        indicator.isHidden = false
+        sourceDropDown.isUserInteractionEnabled = false
+        indicator.startAnimating()
         setupView()
         loadData()
         setupDropDown()
@@ -56,8 +61,18 @@ class FilterVC: UIViewController {
             if let sources = sources {
                 for i in 0..<sources.count {
                     self.sources.append(sources[i].id)
-                    print(self.sources)
                     self.setupDropDown()
+                }
+                self.indicator.stopAnimating()
+                self.indicator.isHidden = true
+                self.sourceDropDown.isUserInteractionEnabled = true
+            }
+            if let error = error {
+                let alert = UIAlertController(title: "", message: "\(error)", preferredStyle: .alert)
+                self.present(alert, animated: true, completion: nil)
+                let when = DispatchTime.now() + 2
+                DispatchQueue.main.asyncAfter(deadline: when){
+                    alert.dismiss(animated: true, completion: nil)
                 }
             }
         }
@@ -77,18 +92,7 @@ class FilterVC: UIViewController {
     
     @IBAction func filterBtnPressed(_ sender: Any) {
         if countryRadioBtn.imageView?.image == UIImage(named: "RadioChecked") {
-//            self.selectedCountryCode = MainVC.selectedCountryCode
             Helper.saveCC(CC: selectedCountryCode)
-            
-//            print(Helper.getCC())
-//            MainVC.instance.loadData()
-////            NewsService.instance.getArticlesListByCountry(countryCode: selectedCountryCode) { (error: Error?, news: [NewsModel]?) in
-////                if let news = news {
-////                    MainVC.news = news
-////                    MainVC.title = self.selectedCountryCode
-//                    self.dismiss(animated: true, completion: nil)
-////                }
-////            }
         }
         else if sourceRadioBtn.imageView?.image == UIImage(named: "RadioChecked") {
             Helper.saveSource(Source: selectedSource)
@@ -119,14 +123,12 @@ class FilterVC: UIViewController {
     func setupDropDown() {
         sourceDropDown.optionArray = self.sources
         sourceDropDown.didSelect{(selectedText , index, id) in
-            print("Selected String: \(selectedText) \n index: \(index)")
             self.selectedSource = selectedText
         }
         
         countryDropDown.optionArray = ["Argentina","Australia","Austria","Belgium","Brazil","Bulgaria","Canada","China","Colombia","Cuba","CzechRepublic","Egypt","France","Germany","Greece","HongKong","Hungary","India","Indonesia","Ireland","Israel","Italy","Japan","Latvia","Lithuania","Malaysia","Mexico","Morocco","Netherlands","NewZealand","Nigeria","Norway","Philippines","Poland","Portugal","Romania","Russia","SaudiArabia","Serbia","Singapore","Slovakia","Slovenia","SouthAfrica","SouthKorea","Sweden","Switzerland","Taiwan","Thailand","Turkey","UAE","Ukraine","United Kingdom","United States","Venuzuela"]
         countryDropDown.optionIds = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54]
         countryDropDown.didSelect{(selectedText , index ,id) in
-            print("Selected String: \(selectedText) \n index: \(index) \n id: \(id)")
             switch id {
             case 1:
                 self.selectedCountryCode = "ar"

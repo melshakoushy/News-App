@@ -19,18 +19,34 @@
                                 <rect key="frame" x="20" y="118" width="374" height="714"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u42-PC-cSa" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                                <rect key="frame" x="152" y="393" width="110" height="110"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="110" id="JEX-KU-H9Z"/>
+                                    <constraint firstAttribute="height" constant="110" id="NGh-Xl-amY"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballRotate"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                        <color key="value" red="0.12175092846155167" green="0.57694482803344727" blue="0.089666731655597687" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="OFh-yd-ZeX" secondAttribute="trailing" constant="20" id="01O-cQ-WXk"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="OFh-yd-ZeX" secondAttribute="bottom" constant="30" id="A0o-a5-HHM"/>
+                            <constraint firstItem="u42-PC-cSa" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="DG0-IE-vkK"/>
+                            <constraint firstItem="u42-PC-cSa" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="PKs-Bs-Wpe"/>
                             <constraint firstItem="OFh-yd-ZeX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ScB-vK-UZS"/>
                             <constraint firstItem="OFh-yd-ZeX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="U2N-As-BCI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="M2b-12-R97">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="4CK-Df-H2U">
+                        <barButtonItem key="leftBarButtonItem" style="done" id="4CK-Df-H2U">
                             <view key="customView" contentMode="scaleToFill" id="NKu-FI-iif">
                                 <rect key="frame" x="20" y="5.5" width="92" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -53,7 +69,7 @@
                                 </constraints>
                             </view>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="Qxx-GH-bID">
+                        <barButtonItem key="rightBarButtonItem" style="done" id="Qxx-GH-bID">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tW6-oP-Fdk">
                                 <rect key="frame" x="336" y="0.0" width="58" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -66,6 +82,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="filterBtn" destination="tW6-oP-Fdk" id="X0C-qp-sMo"/>
+                        <outlet property="indicator" destination="u42-PC-cSa" id="KQE-iH-qJ0"/>
                         <outlet property="navBarTitleLbl" destination="Ypt-AX-xiN" id="oEG-nW-3vk"/>
                         <outlet property="tableView" destination="OFh-yd-ZeX" id="DDW-ys-tL0"/>
                         <segue destination="unO-Mk-GdZ" kind="show" identifier="toDetails" id="PSL-SA-ksW"/>
@@ -89,38 +106,54 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="D26-PV-xa9">
-                                <rect key="frame" x="20" y="154" width="374" height="0.0"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="D26-PV-xa9">
+                                <rect key="frame" x="20" y="144" width="374" height="0.0"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BZA-ER-4Xg">
-                                <rect key="frame" x="20" y="194" width="374" height="0.0"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
+                                <rect key="frame" x="20" y="174" width="374" height="0.0"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="RCC-0e-uV7">
-                                <rect key="frame" x="20" y="244" width="374" height="0.0"/>
+                                <rect key="frame" x="20" y="214" width="374" height="0.0"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eoc-yw-IOd" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                                <rect key="frame" x="152" y="393" width="110" height="110"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="FE7-gh-yxy"/>
+                                    <constraint firstAttribute="width" constant="110" id="zJk-pa-vV0"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballRotate"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                        <color key="value" red="0.12175092846155167" green="0.57694482803344727" blue="0.089666731655597687" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="KSw-fl-b7l" firstAttribute="top" secondItem="Dna-Ji-RQx" secondAttribute="top" constant="36" id="049-6d-0gm"/>
                             <constraint firstItem="Dna-Ji-RQx" firstAttribute="trailing" secondItem="RCC-0e-uV7" secondAttribute="trailing" constant="20" id="EFd-XD-F97"/>
                             <constraint firstItem="Dna-Ji-RQx" firstAttribute="trailing" secondItem="D26-PV-xa9" secondAttribute="trailing" constant="20" id="GRH-ya-a5B"/>
-                            <constraint firstItem="RCC-0e-uV7" firstAttribute="top" secondItem="BZA-ER-4Xg" secondAttribute="bottom" constant="50" id="Jkq-m2-gMs"/>
-                            <constraint firstItem="D26-PV-xa9" firstAttribute="top" secondItem="KSw-fl-b7l" secondAttribute="bottom" constant="30" id="SnQ-KK-CDW"/>
+                            <constraint firstItem="RCC-0e-uV7" firstAttribute="top" secondItem="BZA-ER-4Xg" secondAttribute="bottom" constant="40" id="Jkq-m2-gMs"/>
+                            <constraint firstItem="D26-PV-xa9" firstAttribute="top" secondItem="KSw-fl-b7l" secondAttribute="bottom" constant="20" id="SnQ-KK-CDW"/>
                             <constraint firstItem="D26-PV-xa9" firstAttribute="leading" secondItem="Dna-Ji-RQx" secondAttribute="leading" constant="20" id="T4k-X0-6p6"/>
+                            <constraint firstItem="Eoc-yw-IOd" firstAttribute="centerY" secondItem="FIh-AR-ICl" secondAttribute="centerY" id="a5d-46-jcr"/>
                             <constraint firstItem="KSw-fl-b7l" firstAttribute="leading" secondItem="Dna-Ji-RQx" secondAttribute="leading" constant="20" id="cLc-zS-Hau"/>
                             <constraint firstItem="Dna-Ji-RQx" firstAttribute="trailing" secondItem="BZA-ER-4Xg" secondAttribute="trailing" constant="20" id="gai-uG-bQZ"/>
                             <constraint firstItem="BZA-ER-4Xg" firstAttribute="leading" secondItem="Dna-Ji-RQx" secondAttribute="leading" constant="20" id="hO4-RC-ge3"/>
-                            <constraint firstItem="BZA-ER-4Xg" firstAttribute="top" secondItem="D26-PV-xa9" secondAttribute="bottom" constant="40" id="oZG-tf-0g5"/>
+                            <constraint firstItem="BZA-ER-4Xg" firstAttribute="top" secondItem="D26-PV-xa9" secondAttribute="bottom" constant="30" id="oZG-tf-0g5"/>
                             <constraint firstItem="RCC-0e-uV7" firstAttribute="leading" secondItem="Dna-Ji-RQx" secondAttribute="leading" constant="20" id="ral-fB-FIk"/>
+                            <constraint firstItem="Eoc-yw-IOd" firstAttribute="centerX" secondItem="FIh-AR-ICl" secondAttribute="centerX" id="s7d-Ru-juC"/>
                             <constraint firstItem="Dna-Ji-RQx" firstAttribute="trailing" secondItem="KSw-fl-b7l" secondAttribute="trailing" constant="20" id="xbd-nR-xvb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Dna-Ji-RQx"/>
@@ -130,6 +163,7 @@
                         <outlet property="contentLbl" destination="BZA-ER-4Xg" id="xMv-tQ-TGF"/>
                         <outlet property="createdByLbl" destination="D26-PV-xa9" id="FZA-xt-zJp"/>
                         <outlet property="headlineLbl" destination="KSw-fl-b7l" id="m6e-eT-Xxb"/>
+                        <outlet property="indicator" destination="Eoc-yw-IOd" id="c0j-BP-Zsa"/>
                         <outlet property="urlLbl" destination="RCC-0e-uV7" id="KeZ-T0-sHt"/>
                     </connections>
                 </viewController>

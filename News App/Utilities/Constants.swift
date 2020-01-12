@@ -17,3 +17,6 @@ let TOPHEADLINE_URL = "\(BASE_URL)top-headlines?country="
 let ARTICLE_URL = "\(BASE_URL)everything?q="
 let SOURCES_URL = "\(BASE_URL)top-headlines?sources="
 let ALLSOURCES_URL = "\(BASE_URL)sources?apiKey=\(API_KEY)"
+
+//MainVCSources
+let SOURCES = "bbc-news,cnn,the-new-york-times,cbs-news,business-insider,reuters,the-new-york-times,techradar"

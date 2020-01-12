@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import AlamofireImage
+import NVActivityIndicatorView
 
 class MainVC: UIViewController {
     
@@ -16,17 +17,15 @@ class MainVC: UIViewController {
     @IBOutlet weak var filterBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var navBarTitleLbl: UILabel!
+    @IBOutlet weak var indicator: NVActivityIndicatorView!
     
     //Constants
     let newsCellId = "NewsCell"
     let errorCellId = "ErrorCell"
     
     //Variables
-    static var news = [NewsModel]()
-    static var title: String = "News App"
+    var news = [NewsModel]()
     var selectedTitle: String = ""
-    var selectedDate: String = ""
-    var sources: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +37,8 @@ class MainVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        indicator.isHidden = false
+        indicator.startAnimating()
         loadData()
     }
     
@@ -47,37 +48,58 @@ class MainVC: UIViewController {
     }
     
     func loadData() {
-        NewsService.instance.getSourcesList { (error: Error?, sources: [SourceModel]?) in
-            if let sources = sources {
-                for i in 0..<19 {
-                    self.sources = "\(self.sources)" + "\(sources[i].id)"
-                }
-            }
-        }
         if Helper.getFT() == 1 {
             NewsService.instance.getArticlesListByCountry(countryCode: Helper.getCC() ?? "us") { (error: Error?, news: [NewsModel]?) in
                 if let news = news {
-                    MainVC.news = news
+                    self.news = news
                     self.tableView.reloadData()
                     self.navBarTitleLbl.text = "\(String(describing: Helper.getCC()!))"
+                    self.indicator.stopAnimating()
+                    self.indicator.isHidden = true
+                }
+                if let error = error {
+                    let alert = UIAlertController(title: "", message: "\(error)", preferredStyle: .alert)
+                    self.present(alert, animated: true, completion: nil)
+                    let when = DispatchTime.now() + 2
+                    DispatchQueue.main.asyncAfter(deadline: when){
+                        alert.dismiss(animated: true, completion: nil)
+                    }
                 }
             }
             
         } else if Helper.getFT() == 2 {
-            
             NewsService.instance.getArticlesListBySource(source: Helper.getSource() ?? "") { (error: Error?, news: [NewsModel]?) in
                 if let news = news {
-                    MainVC.news = news
+                    self.news = news
                     self.tableView.reloadData()
                     self.navBarTitleLbl.text = "\(String(describing: Helper.getSource()!))"
+                    self.indicator.stopAnimating()
+                    self.indicator.isHidden = true
+                }
+                if let error = error {
+                    let alert = UIAlertController(title: "", message: "\(error)", preferredStyle: .alert)
+                    self.present(alert, animated: true, completion: nil)
+                    let when = DispatchTime.now() + 2
+                    DispatchQueue.main.asyncAfter(deadline: when){
+                        alert.dismiss(animated: true, completion: nil)
+                    }
                 }
             }
         } else {
-            NewsService.instance.getArticlesListByCountry(countryCode: Helper.getCC() ?? "us") { (error: Error?, news: [NewsModel]?) in
+            NewsService.instance.getArticlesListBySource(source: SOURCES) { (error: Error?, news: [NewsModel]?) in
                 if let news = news {
-                    MainVC.news = news
+                    self.news = news
                     self.tableView.reloadData()
-                    self.navBarTitleLbl.text = "News App"
+                    self.indicator.stopAnimating()
+                    self.indicator.isHidden = true
+                }
+                if let error = error {
+                    let alert = UIAlertController(title: "", message: "\(error)", preferredStyle: .alert)
+                    self.present(alert, animated: true, completion: nil)
+                    let when = DispatchTime.now() + 2
+                    DispatchQueue.main.asyncAfter(deadline: when){
+                        alert.dismiss(animated: true, completion: nil)
+                    }
                 }
             }
         }
@@ -85,6 +107,8 @@ class MainVC: UIViewController {
     
     
     @IBAction func filterBtnPressed(_ sender: Any) {
+        self.indicator.stopAnimating()
+        self.indicator.isHidden = true
         let filterVC = FilterVC()
         filterVC.modalPresentationStyle = .custom
         present(filterVC, animated: true, completion: nil)
@@ -105,7 +129,7 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if Connectivity.isConnectedToInternet() {
-            return MainVC.news.count
+            return self.news.count
         } else {
             return 1
         }
@@ -114,10 +138,9 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if Connectivity.isConnectedToInternet() {
             let cell = tableView.dequeueReusableCell(withIdentifier: newsCellId, for: indexPath) as! NewsCell
-            cell.newsTitleLbl.text = MainVC.news[indexPath.row].title
-            cell.newsDateLbl.text = MainVC.news[indexPath.row].publishedAt
-            Alamofire.request(MainVC.news[indexPath.row].urlToImage).responseImage { (response) in
-                print(response)
+            cell.newsTitleLbl.text = self.news[indexPath.row].title
+            cell.newsDateLbl.text = self.news[indexPath.row].publishedAt
+            Alamofire.request(self.news[indexPath.row].urlToImage).responseImage { (response) in
                 if let image = response.result.value {
                     DispatchQueue.main.async {
                         cell.newsImg.image = image
@@ -140,8 +163,8 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedTitle = "\(self.news[indexPath.row].title)"
         performSegue(withIdentifier: "toDetails", sender: self)
-        selectedTitle = "\(MainVC.news[indexPath.row].title)"
     }
 }
 

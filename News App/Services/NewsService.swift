@@ -22,7 +22,6 @@ class NewsService {
                 print(error.localizedDescription)
             case .success(let value):
                 let json = JSON(value)
-                print(value as Any)
                 if let sources = json["sources"].array {
                     var newsources = [SourceModel]()
                     for source in sources {
@@ -37,10 +36,9 @@ class NewsService {
             }
         }
     }
-
+    
     func getArticleByTitle(title: String,completion: @escaping (_ error: Error?, _ articles: [NewsModel]?) -> Void) {
         let url = "\(ARTICLE_URL)\(title.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&apiKey=\(API_KEY)"
-        print(url)
         Alamofire.request("\(url)", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             switch response.result {
             case .failure(let error):
@@ -48,7 +46,6 @@ class NewsService {
                 print(error.localizedDescription)
             case .success(let value):
                 let json = JSON(value)
-                print(value as Any)
                 if let articles = json["articles"].array {
                     var newArticles = [NewsModel]()
                     for article in articles {
@@ -70,7 +67,6 @@ class NewsService {
     }
     
     func getArticlesListByCountry(countryCode:String,completion: @escaping (_ error: Error?, _ News: [NewsModel]?) -> Void) {
-        print("\(TOPHEADLINE_URL)\(countryCode)&apiKey=\(API_KEY)")
         Alamofire.request("\(TOPHEADLINE_URL)\(countryCode)&apiKey=\(API_KEY)", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             switch response.result {
             case .failure(let error):
@@ -78,7 +74,6 @@ class NewsService {
                 print(error.localizedDescription)
             case .success(let value):
                 let json = JSON(value)
-                print(value as Any)
                 if let articles = json["articles"].array {
                     var newArticles = [NewsModel]()
                     for article in articles {
@@ -100,10 +95,8 @@ class NewsService {
             switch response.result {
             case .failure(let error):
                 completion(error, nil)
-                print(error.localizedDescription)
             case .success(let value):
                 let json = JSON(value)
-                print(value as Any)
                 if let articles = json["articles"].array {
                     var newArticles = [NewsModel]()
                     for article in articles {

@@ -52,7 +52,7 @@ class Helper: NSObject {
         def.removeObject(forKey: "cc")
         restartApp()
     }
-
+    
     class func restartApp() {
         guard let window = UIApplication.shared.keyWindow else {return}
         let sb = UIStoryboard(name: "Main", bundle: nil)

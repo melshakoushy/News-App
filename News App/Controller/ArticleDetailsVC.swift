@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class ArticleDetailsVC: UIViewController {
     
@@ -15,6 +16,7 @@ class ArticleDetailsVC: UIViewController {
     @IBOutlet weak var createdByLbl: UILabel!
     @IBOutlet weak var contentLbl: UILabel!
     @IBOutlet weak var urlLbl: UILabel!
+    @IBOutlet weak var indicator: NVActivityIndicatorView!
     
     //Variables
     var selectedTitle: String = ""
@@ -25,6 +27,8 @@ class ArticleDetailsVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        indicator.isHidden = false
+        indicator.startAnimating()
         loadData()
     }
     
@@ -32,6 +36,8 @@ class ArticleDetailsVC: UIViewController {
         NewsService.instance.getArticleByTitle(title: selectedTitle) { (error: Error?, news: [NewsModel]?) in
             if let news = news {
                 if news.count == 0 {
+                    self.indicator.stopAnimating()
+                    self.indicator.isHidden = true
                     self.headlineLbl.text = ""
                     self.createdByLbl.text = ""
                     self.contentLbl.text = ""
@@ -41,7 +47,7 @@ class ArticleDetailsVC: UIViewController {
                     self.present(alert, animated: true, completion: nil)
                     let when = DispatchTime.now() + 2
                     DispatchQueue.main.asyncAfter(deadline: when){
-                      alert.dismiss(animated: true, completion: nil)
+                        alert.dismiss(animated: true, completion: nil)
                     }
                 } else {
                     let article = news[0]
@@ -50,6 +56,16 @@ class ArticleDetailsVC: UIViewController {
                     self.contentLbl.text = article.desk
                     self.urlLbl.text = "Source Url: \(article.url)"
                     self.navigationItem.title = article.sourceName
+                    self.indicator.stopAnimating()
+                    self.indicator.isHidden = true
+                }
+            }
+            if let error = error {
+                let alert = UIAlertController(title: "", message: "\(error)", preferredStyle: .alert)
+                self.present(alert, animated: true, completion: nil)
+                let when = DispatchTime.now() + 2
+                DispatchQueue.main.asyncAfter(deadline: when){
+                    alert.dismiss(animated: true, completion: nil)
                 }
             }
         }

@@ -16,6 +16,7 @@
                 <outlet property="countryDropDown" destination="QAD-Nr-2aM" id="o8i-sB-pfj"/>
                 <outlet property="countryRadioBtn" destination="l5y-S0-s4Y" id="Eqs-VO-ier"/>
                 <outlet property="filterBtn" destination="9xw-j1-icb" id="cV0-50-B2a"/>
+                <outlet property="indicator" destination="NP1-MI-ghF" id="WmR-nu-Zqd"/>
                 <outlet property="sourceDropDown" destination="QMx-rF-7cM" id="Imt-rL-YJs"/>
                 <outlet property="sourceRadioBtn" destination="5rM-W3-ZMx" id="2gM-jv-Mru"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -230,17 +231,34 @@
                         <constraint firstAttribute="trailing" secondItem="1Jm-au-wcu" secondAttribute="trailing" id="zF3-4E-tZe"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NP1-MI-ghF" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                    <rect key="frame" x="204.5" y="453" width="45" height="45"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="45" id="7dq-ec-g6b"/>
+                        <constraint firstAttribute="height" constant="45" id="sfp-jj-Apa"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballRotate"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="color">
+                            <color key="value" red="0.12175092846155167" green="0.57694482803344727" blue="0.089666731655597687" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="3iq-qy-YO7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Gr8-eh-jbd"/>
+                <constraint firstItem="NP1-MI-ghF" firstAttribute="top" secondItem="QMx-rF-7cM" secondAttribute="top" id="INy-d5-Igb"/>
                 <constraint firstItem="B4n-GV-vHZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="NIL-8s-kve"/>
                 <constraint firstAttribute="trailing" secondItem="B4n-GV-vHZ" secondAttribute="trailing" id="Pxh-q7-xaS"/>
                 <constraint firstAttribute="bottom" secondItem="B4n-GV-vHZ" secondAttribute="bottom" id="T6m-Fi-vKE"/>
                 <constraint firstItem="B4n-GV-vHZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="TVE-f8-3xK"/>
+                <constraint firstItem="NP1-MI-ghF" firstAttribute="centerX" secondItem="QMx-rF-7cM" secondAttribute="centerX" id="Waw-0I-dJI"/>
                 <constraint firstItem="3iq-qy-YO7" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="djn-ZL-Tm3"/>
                 <constraint firstItem="3iq-qy-YO7" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="nWr-ps-gio"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="3iq-qy-YO7" secondAttribute="trailing" constant="20" id="oLg-gn-LcF"/>
+                <constraint firstItem="NP1-MI-ghF" firstAttribute="bottom" secondItem="QMx-rF-7cM" secondAttribute="bottom" id="p6r-E9-R2j"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="139" y="133"/>

@@ -10,5 +10,6 @@ pod 'iOSDropDown'
 pod 'Alamofire'
 pod 'AlamofireImage'
 pod 'SwiftyJSON'
+pod 'NVActivityIndicatorView'
 
 end

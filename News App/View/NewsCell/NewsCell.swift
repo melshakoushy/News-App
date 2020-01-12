@@ -16,7 +16,7 @@ class NewsCell: UITableViewCell {
     @IBOutlet weak var newsTitleLbl: UILabel!
     @IBOutlet weak var newsDateLbl: UILabel!
     
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
