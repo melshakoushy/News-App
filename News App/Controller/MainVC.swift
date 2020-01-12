@@ -26,6 +26,7 @@ class MainVC: UIViewController {
     static var title: String = "News App"
     var selectedTitle: String = ""
     var selectedDate: String = ""
+    var sources: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +47,13 @@ class MainVC: UIViewController {
     }
     
     func loadData() {
+        NewsService.instance.getSourcesList { (error: Error?, sources: [SourceModel]?) in
+            if let sources = sources {
+                for i in 0..<19 {
+                    self.sources = "\(self.sources)" + "\(sources[i].id)"
+                }
+            }
+        }
         if Helper.getFT() == 1 {
             NewsService.instance.getArticlesListByCountry(countryCode: Helper.getCC() ?? "us") { (error: Error?, news: [NewsModel]?) in
                 if let news = news {
@@ -86,7 +94,6 @@ class MainVC: UIViewController {
         if segue.identifier == "toDetails" {
             let destVC = segue.destination as! ArticleDetailsVC
             destVC.selectedTitle = self.selectedTitle
-            destVC.selectedDate = self.selectedDate
         }
     }
 }
@@ -134,8 +141,7 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "toDetails", sender: self)
-        selectedTitle = MainVC.news[indexPath.row].title
-        selectedDate = MainVC.news[indexPath.row].publishedAt
+        selectedTitle = "\(MainVC.news[indexPath.row].title)"
     }
 }
 

@@ -15,4 +15,5 @@ class NewsModel: NSObject {
     var desk: String = ""
     var url: String = ""
     var auther: String = ""
+    var sourceName: String = ""
 }

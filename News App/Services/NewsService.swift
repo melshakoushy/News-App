@@ -13,30 +13,6 @@ import SwiftyJSON
 class NewsService {
     
     static let instance = NewsService()
-
-    func getArticlesList(completion: @escaping (_ error: Error?, _ News: [NewsModel]?) -> Void) {
-        Alamofire.request("\(TOPHEADLINE_URL)us&apiKey=\(API_KEY)", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
-            switch response.result {
-            case .failure(let error):
-                completion(error, nil)
-                print(error.localizedDescription)
-            case .success(let value):
-                let json = JSON(value)
-                if let articles = json["articles"].array {
-                    var newArticles = [NewsModel]()
-                    for article in articles {
-                        guard let article = article.dictionary else {return}
-                        let newArticle = NewsModel()
-                        newArticle.title = article["title"]?.string ?? ""
-                        newArticle.urlToImage = article["urlToImage"]?.string ?? ""
-                        newArticle.publishedAt = article["publishedAt"]?.string ?? ""
-                        newArticles.append(newArticle)
-                    }
-                    completion(nil, newArticles)
-                }
-            }
-        }
-    }
     
     func getSourcesList(completion: @escaping (_ error: Error?, _ sources: [SourceModel]?) -> Void) {
         Alamofire.request("\(ALLSOURCES_URL)", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
@@ -63,7 +39,8 @@ class NewsService {
     }
 
     func getArticleByTitle(title: String,completion: @escaping (_ error: Error?, _ articles: [NewsModel]?) -> Void) {
-        let url = "\(ARTICLE_URL)\"\(title.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)\"&apiKey=\(API_KEY)"
+        let url = "\(ARTICLE_URL)\(title.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&apiKey=\(API_KEY)"
+        print(url)
         Alamofire.request("\(url)", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             switch response.result {
             case .failure(let error):
@@ -83,6 +60,7 @@ class NewsService {
                         newArticle.auther = article["author"]?.string ?? ""
                         newArticle.desk = article["description"]?.string ?? ""
                         newArticle.url = article["url"]?.string ?? ""
+                        newArticle.sourceName = article["source"]?["name"].string ?? ""
                         newArticles.append(newArticle)
                     }
                     completion(nil, newArticles)
